@@ -10,7 +10,7 @@ Model Documentation: [Link](https://developer.cisco.com/docs/cisco-nexus-3000-an
 ## Examples
 
 ```hcl
-module "nxos_vrf" {
+module "nxos_interface_nve" {
   source  = "netascode/interface-nve/nxos"
   version = ">= 0.0.1"
 
@@ -59,7 +59,7 @@ module "nxos_vrf" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_nxos"></a> [nxos](#provider\_nxos) | 0.3.5 |
+| <a name="provider_nxos"></a> [nxos](#provider\_nxos) | >= 0.3.5 |
 
 ## Inputs
 

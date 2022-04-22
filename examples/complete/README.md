@@ -12,7 +12,7 @@ $ terraform apply
 Note that this example will create resources. Resources can be destroyed with `terraform destroy`.
 
 ```hcl
-module "nxos_vrf" {
+module "nxos_interface_nve" {
   source  = "netascode/interface-nve/nxos"
   version = ">= 0.0.1"
 

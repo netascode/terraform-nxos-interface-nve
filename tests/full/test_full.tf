@@ -30,7 +30,7 @@ resource "nxos_feature_evpn" "evpn" {
 module "main" {
   source = "../.."
 
-  enabled                          = true
+  admin_state                      = true
   advertise_virtual_mac            = true
   hold_down_time                   = 123
   host_reachability_protocol       = "bgp"

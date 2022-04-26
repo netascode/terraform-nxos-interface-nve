@@ -16,7 +16,7 @@ module "nxos_interface_nve" {
   source  = "netascode/interface-nve/nxos"
   version = ">= 0.0.1"
 
-  enabled                          = true
+  admin_state                      = true
   advertise_virtual_mac            = true
   hold_down_time                   = 123
   host_reachability_protocol       = "bgp"

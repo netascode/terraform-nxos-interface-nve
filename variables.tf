@@ -1,6 +1,6 @@
-variable "enabled" {
-  description = "Interface nve1 admin state."
-  type        = string
+variable "admin_state" {
+  description = "Administrative port state. Set `true` for `up` or `false` for `down`."
+  type        = bool
   default     = false
 }
 

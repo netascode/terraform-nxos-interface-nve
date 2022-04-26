@@ -14,7 +14,7 @@ module "nxos_interface_nve" {
   source  = "netascode/interface-nve/nxos"
   version = ">= 0.0.1"
 
-  enabled                          = true
+  admin_state                      = true
   advertise_virtual_mac            = true
   hold_down_time                   = 123
   host_reachability_protocol       = "bgp"
@@ -65,7 +65,7 @@ module "nxos_interface_nve" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_enabled"></a> [enabled](#input\_enabled) | Interface nve1 admin state. | `string` | `false` | no |
+| <a name="input_admin_state"></a> [admin\_state](#input\_admin\_state) | Administrative port state. Set `true` for `up` or `false` for `down`. | `bool` | `false` | no |
 | <a name="input_advertise_virtual_mac"></a> [advertise\_virtual\_mac](#input\_advertise\_virtual\_mac) | Enable or disable Virtual MAC Advertisement in VPC mode. | `bool` | `false` | no |
 | <a name="input_hold_down_time"></a> [hold\_down\_time](#input\_hold\_down\_time) | Hold Down Time. | `number` | `180` | no |
 | <a name="input_host_reachability_protocol"></a> [host\_reachability\_protocol](#input\_host\_reachability\_protocol) | Host Reachability Protocol. Choices: `Flood-and-learn`, `bgp`, `controller`, `openflow`, `openflowIR`. | `string` | `"Flood-and-learn"` | no |

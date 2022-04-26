@@ -4,7 +4,7 @@ locals {
 }
 
 resource "nxos_nve_interface" "nvoEp" {
-  admin_state                      = var.enabled ? "enabled" : "disabled"
+  admin_state                      = var.admin_state ? "enabled" : "disabled"
   advertise_virtual_mac            = var.advertise_virtual_mac
   hold_down_time                   = var.hold_down_time
   host_reachability_protocol       = var.host_reachability_protocol

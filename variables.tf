@@ -1,3 +1,9 @@
+variable "device" {
+  description = "A device name from the provider configuration."
+  type        = string
+  default     = null
+}
+
 variable "admin_state" {
   description = "Administrative port state. Set `true` for `up` or `false` for `down`."
   type        = bool
@@ -45,7 +51,7 @@ variable "multicast_group_l2" {
 
   validation {
     condition     = can(regex("^\\d+\\.\\d+\\.\\d+\\.\\d+$", var.multicast_group_l2))
-    error_message = "`multicast_group`: Allowed format: `239.1.1.1`."
+    error_message = "Allowed format: `239.1.1.1`."
   }
 }
 
@@ -56,7 +62,7 @@ variable "multicast_group_l3" {
 
   validation {
     condition     = can(regex("^\\d+\\.\\d+\\.\\d+\\.\\d+$", var.multicast_group_l3))
-    error_message = "`multicast_group`: Allowed format: `239.1.1.1`."
+    error_message = "Allowed format: `239.1.1.1`."
   }
 }
 

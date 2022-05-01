@@ -65,6 +65,7 @@ module "nxos_interface_nve" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_device"></a> [device](#input\_device) | A device name from the provider configuration. | `string` | `null` | no |
 | <a name="input_admin_state"></a> [admin\_state](#input\_admin\_state) | Administrative port state. Set `true` for `up` or `false` for `down`. | `bool` | `false` | no |
 | <a name="input_advertise_virtual_mac"></a> [advertise\_virtual\_mac](#input\_advertise\_virtual\_mac) | Enable or disable Virtual MAC Advertisement in VPC mode. | `bool` | `false` | no |
 | <a name="input_hold_down_time"></a> [hold\_down\_time](#input\_hold\_down\_time) | Hold Down Time. | `number` | `180` | no |

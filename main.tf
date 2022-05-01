@@ -4,6 +4,7 @@ locals {
 }
 
 resource "nxos_nve_interface" "nvoEp" {
+  device                           = var.device
   admin_state                      = var.admin_state ? "enabled" : "disabled"
   advertise_virtual_mac            = var.advertise_virtual_mac
   hold_down_time                   = var.hold_down_time
@@ -18,6 +19,7 @@ resource "nxos_nve_interface" "nvoEp" {
 }
 
 resource "nxos_nve_vni_container" "nvoNws" {
+  device = var.device
   depends_on = [
     nxos_nve_interface.nvoEp
   ]
@@ -25,6 +27,7 @@ resource "nxos_nve_vni_container" "nvoNws" {
 
 resource "nxos_nve_vni" "nvoNw" {
   for_each                       = local.vni_map
+  device                         = var.device
   vni                            = each.value.vni
   associate_vrf                  = each.value.associate_vrf
   multicast_group                = each.value.multicast_group
@@ -38,6 +41,7 @@ resource "nxos_nve_vni" "nvoNw" {
 
 resource "nxos_nve_vni_ingress_replication" "nvoIngRepl" {
   for_each = local.vni_map_with_ingress
+  device   = var.device
   vni      = each.value.vni
   protocol = each.value.ingress_replication_protocol
 

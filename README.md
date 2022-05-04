@@ -59,7 +59,7 @@ module "nxos_interface_nve" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_nxos"></a> [nxos](#provider\_nxos) | 0.3.8 |
+| <a name="provider_nxos"></a> [nxos](#provider\_nxos) | >= 0.3.8 |
 
 ## Inputs
 

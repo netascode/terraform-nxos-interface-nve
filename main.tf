@@ -26,13 +26,13 @@ resource "nxos_nve_vni_container" "nvoNws" {
 }
 
 resource "nxos_nve_vni" "nvoNw" {
-  for_each                       = local.vni_map
-  device                         = var.device
-  vni                            = each.value.vni
-  associate_vrf                  = each.value.associate_vrf
-  multicast_group                = each.value.multicast_group
-  multisite_ingrress_replication = each.value.multisite_ingrress_replication
-  suppress_arp                   = each.value.suppress_arp
+  for_each                      = local.vni_map
+  device                        = var.device
+  vni                           = each.value.vni
+  associate_vrf                 = each.value.associate_vrf
+  multicast_group               = each.value.multicast_group
+  multisite_ingress_replication = each.value.multisite_ingress_replication
+  suppress_arp                  = each.value.suppress_arp
 
   depends_on = [
     nxos_nve_vni_container.nvoNws

@@ -6,7 +6,7 @@ terraform {
 
     nxos = {
       source  = "netascode/nxos"
-      version = ">=0.3.5"
+      version = ">=0.3.8"
     }
   }
 }
@@ -37,7 +37,7 @@ module "main" {
   ingress_replication_protocol_bgp = true
   source_interface                 = "lo0"
   suppress_arp                     = true
-  suppress_mac_route               = true
+  suppress_mac_route               = false
   vnis = [
     {
       vni           = 10
@@ -67,163 +67,160 @@ module "main" {
   ]
 }
 
-data "nxos_rest" "nxos_nve_interface" {
-  dn = "sys/eps/epId-[1]"
-
+data "nxos_nve_interface" "nvoEp" {
   depends_on = [module.main]
 }
 
-resource "test_assertions" "nxos_nve_interface" {
-  component = "nxos_nve_interface"
+resource "test_assertions" "nvoEp" {
+  component = "nvoEp"
 
-  equal "adminSt" {
-    description = "adminSt"
-    got         = data.nxos_rest.nxos_nve_interface.content.adminSt
+  equal "admin_state" {
+    description = "admin_state"
+    got         = data.nxos_nve_interface.nvoEp.admin_state
     want        = "enabled"
   }
 
-  equal "advertiseVmac" {
-    description = "advertiseVmac"
-    got         = data.nxos_rest.nxos_nve_interface.content.advertiseVmac
-    want        = "yes"
+  equal "advertise_virtual_mac" {
+    description = "advertise_virtual_mac"
+    got         = data.nxos_nve_interface.nvoEp.advertise_virtual_mac
+    want        = true
   }
 
-  equal "holdDownTime" {
-    description = "holdDownTime"
-    got         = data.nxos_rest.nxos_nve_interface.content.holdDownTime
-    want        = "123"
+  equal "hold_down_time" {
+    description = "hold_down_time"
+    got         = data.nxos_nve_interface.nvoEp.hold_down_time
+    want        = 123
   }
 
-  equal "hostReach" {
-    description = "hostReach"
-    got         = data.nxos_rest.nxos_nve_interface.content.hostReach
+  equal "host_reachability_protocol" {
+    description = "host_reachability_protocol"
+    got         = data.nxos_nve_interface.nvoEp.host_reachability_protocol
     want        = "bgp"
   }
 
-  equal "ingressReplProtoBGP" {
-    description = "hostReach"
-    got         = data.nxos_rest.nxos_nve_interface.content.ingressReplProtoBGP
-    want        = "yes"
+  equal "ingress_replication_protocol_bgp" {
+    description = "ingress_replication_protocol_bgp"
+    got         = data.nxos_nve_interface.nvoEp.ingress_replication_protocol_bgp
+    want        = true
   }
 
-  equal "multisiteBordergwInterface" {
-    description = "multisiteBordergwInterface"
-    got         = data.nxos_rest.nxos_nve_interface.content.multisiteBordergwInterface
+  equal "multisite_source_interface" {
+    description = "multisite_source_interface"
+    got         = data.nxos_nve_interface.nvoEp.multisite_source_interface
     want        = "unspecified"
   }
 
-  equal "sourceInterface" {
-    description = "sourceInterface"
-    got         = data.nxos_rest.nxos_nve_interface.content.sourceInterface
+  equal "source_interface" {
+    description = "source_interface"
+    got         = data.nxos_nve_interface.nvoEp.source_interface
     want        = "lo0"
   }
 
-  equal "suppressARP" {
-    description = "suppressARP"
-    got         = data.nxos_rest.nxos_nve_interface.content.suppressARP
-    want        = "yes"
+  equal "suppress_arp" {
+    description = "suppress_arp"
+    got         = data.nxos_nve_interface.nvoEp.suppress_arp
+    want        = true
   }
 
-  equal "suppressMacRoute" {
-    description = "suppressMacRoute"
-    got         = data.nxos_rest.nxos_nve_interface.content.suppressMacRoute
-    want        = "yes"
+  equal "suppress_mac_route" {
+    description = "suppress_mac_route"
+    got         = data.nxos_nve_interface.nvoEp.suppress_mac_route
+    want        = false
   }
 }
 
-
-data "nxos_rest" "nxos_nve_vni_12" {
-  dn = "sys/eps/epId-[1]/nws/vni-[12]"
+data "nxos_nve_vni" "nvoNw12" {
+  vni = 12
 
   depends_on = [module.main]
 }
 
-resource "test_assertions" "nxos_nve_vni_12" {
-  component = "nxos_nve_vni_12"
+resource "test_assertions" "nvoNw12" {
+  component = "nvoNw12"
 
-  equal "associateVrfFlag" {
-    description = "associateVrfFlag"
-    got         = data.nxos_rest.nxos_nve_vni_12.content.associateVrfFlag
-    want        = "no"
+  equal "vni" {
+    description = "vni"
+    got         = data.nxos_nve_vni.nvoNw12.vni
+    want        = 12
   }
 
-  equal "mcastGroup" {
-    description = "mcastGroup"
-    got         = data.nxos_rest.nxos_nve_vni_12.content.mcastGroup
+  equal "associate_vrf" {
+    description = "associate_vrf"
+    got         = data.nxos_nve_vni.nvoNw12.associate_vrf
+    want        = false
+  }
+
+  equal "multicast_group" {
+    description = "multicast_group"
+    got         = data.nxos_nve_vni.nvoNw12.multicast_group
     want        = "239.1.1.1"
   }
 
-  equal "multisiteIngRepl" {
-    description = "multisiteIngRepl"
-    got         = data.nxos_rest.nxos_nve_vni_12.content.multisiteIngRepl
+  equal "multisite_ingress_replication" {
+    description = "multisite_ingress_replication"
+    got         = data.nxos_nve_vni.nvoNw12.multisite_ingress_replication
     want        = "disable"
   }
 
-  equal "suppressARP" {
-    description = "suppressARP"
-    got         = data.nxos_rest.nxos_nve_vni_12.content.suppressARP
+  equal "suppress_arp" {
+    description = "suppress_arp"
+    got         = data.nxos_nve_vni.nvoNw12.suppress_arp
     want        = "off"
-  }
-
-  equal "vni" {
-    description = "vni"
-    got         = data.nxos_rest.nxos_nve_vni_12.content.vni
-    want        = "12"
   }
 }
 
-data "nxos_rest" "nxos_nve_vni_13" {
-  dn = "sys/eps/epId-[1]/nws/vni-[13]"
+data "nxos_nve_vni" "nvoNw13" {
+  vni = 13
 
   depends_on = [module.main]
 }
 
-resource "test_assertions" "nxos_nve_vni_13" {
-  component = "nxos_nve_vni_13"
+resource "test_assertions" "nvoNw13" {
+  component = "nvoNw13"
 
-  equal "associateVrfFlag" {
-    description = "associateVrfFlag"
-    got         = data.nxos_rest.nxos_nve_vni_13.content.associateVrfFlag
-    want        = "no"
+  equal "vni" {
+    description = "vni"
+    got         = data.nxos_nve_vni.nvoNw13.vni
+    want        = 13
   }
 
-  equal "mcastGroup" {
-    description = "mcastGroup"
-    got         = data.nxos_rest.nxos_nve_vni_13.content.mcastGroup
+  equal "associate_vrf" {
+    description = "associate_vrf"
+    got         = data.nxos_nve_vni.nvoNw13.associate_vrf
+    want        = false
+  }
+
+  equal "multicast_group" {
+    description = "multicast_group"
+    got         = data.nxos_nve_vni.nvoNw13.multicast_group
     want        = "0.0.0.0"
   }
 
-  equal "multisiteIngRepl" {
-    description = "multisiteIngRepl"
-    got         = data.nxos_rest.nxos_nve_vni_13.content.multisiteIngRepl
+  equal "multisite_ingress_replication" {
+    description = "multisite_ingress_replication"
+    got         = data.nxos_nve_vni.nvoNw13.multisite_ingress_replication
     want        = "disable"
   }
 
-  equal "suppressARP" {
-    description = "suppressARP"
-    got         = data.nxos_rest.nxos_nve_vni_13.content.suppressARP
+  equal "suppress_arp" {
+    description = "suppress_arp"
+    got         = data.nxos_nve_vni.nvoNw13.suppress_arp
     want        = "enabled"
-  }
-
-  equal "vni" {
-    description = "vni"
-    got         = data.nxos_rest.nxos_nve_vni_13.content.vni
-    want        = "13"
   }
 }
 
-data "nxos_rest" "nxos_nve_vni_13_ir" {
-  dn = "sys/eps/epId-[1]/nws/vni-[13]/IngRepl"
+data "nxos_nve_vni_ingress_replication" "nvoIngRepl" {
+  vni = 13
 
   depends_on = [module.main]
 }
 
-resource "test_assertions" "nxos_nve_vni_13_ir" {
-  component = "nxos_nve_vni_13_ir"
+resource "test_assertions" "nvoIngRepl" {
+  component = "nvoIngRepl"
 
-  equal "proto" {
-    description = "proto"
-    got         = data.nxos_rest.nxos_nve_vni_13_ir.content.proto
+  equal "protocol" {
+    description = "protocol"
+    got         = data.nxos_nve_vni_ingress_replication.nvoIngRepl.protocol
     want        = "bgp"
   }
 }

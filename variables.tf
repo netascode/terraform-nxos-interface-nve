@@ -101,14 +101,14 @@ variable "suppress_mac_route" {
 }
 
 variable "vnis" {
-  description = "List of vnis. Default value `associate_vrf`: `false`. Default value `multicast_group`: `0.0.0.0`. Choices `multisite_ingrress_replication`: `enable`, `disable`, `enableOptimized`. Default value `multisite_ingrress_replication`: `disable`. Choices `suppress_arp`: `enabled`, `disabled`, `off`. Default value `suppress_arp`: `off`. Choices `ingress_replication_protocol`: `bgp`, `static`, `unknown`. Default value `ingress_replication_protocol`: `unknown`."
+  description = "List of vnis. Default value `associate_vrf`: `false`. Default value `multicast_group`: `0.0.0.0`. Choices `multisite_ingress_replication`: `enable`, `disable`, `enableOptimized`. Default value `multisite_ingress_replication`: `disable`. Choices `suppress_arp`: `enabled`, `disabled`, `off`. Default value `suppress_arp`: `off`. Choices `ingress_replication_protocol`: `bgp`, `static`, `unknown`. Default value `ingress_replication_protocol`: `unknown`."
   type = list(object({
-    vni                            = number
-    associate_vrf                  = optional(bool)
-    multicast_group                = optional(string)
-    multisite_ingrress_replication = optional(string)
-    suppress_arp                   = optional(string)
-    ingress_replication_protocol   = optional(string)
+    vni                           = number
+    associate_vrf                 = optional(bool)
+    multicast_group               = optional(string)
+    multisite_ingress_replication = optional(string)
+    suppress_arp                  = optional(string)
+    ingress_replication_protocol  = optional(string)
   }))
   default = []
 
@@ -129,9 +129,9 @@ variable "vnis" {
 
   validation {
     condition = alltrue([
-      for v in var.vnis : try(contains(["enable", "disable", "enableOptimized"], v.multisite_ingrress_replication), v.multisite_ingrress_replication == null)
+      for v in var.vnis : try(contains(["enable", "disable", "enableOptimized"], v.multisite_ingress_replication), v.multisite_ingress_replication == null)
     ])
-    error_message = "`multisite_ingrress_replication`: Allowed values are: `enable`, `disable` or `enableOptimized`."
+    error_message = "`multisite_ingress_replication`: Allowed values are: `enable`, `disable` or `enableOptimized`."
   }
 
   validation {

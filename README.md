@@ -12,7 +12,7 @@ Model Documentation: [Link](https://developer.cisco.com/docs/cisco-nexus-3000-an
 ```hcl
 module "nxos_interface_nve" {
   source  = "netascode/interface-nve/nxos"
-  version = ">= 0.0.1"
+  version = ">= 0.1.0"
 
   admin_state                      = true
   advertise_virtual_mac            = true
@@ -53,13 +53,13 @@ module "nxos_interface_nve" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
-| <a name="requirement_nxos"></a> [nxos](#requirement\_nxos) | >= 0.3.5 |
+| <a name="requirement_nxos"></a> [nxos](#requirement\_nxos) | >= 0.3.8 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_nxos"></a> [nxos](#provider\_nxos) | >= 0.3.5 |
+| <a name="provider_nxos"></a> [nxos](#provider\_nxos) | 0.3.8 |
 
 ## Inputs
 
@@ -77,7 +77,7 @@ module "nxos_interface_nve" {
 | <a name="input_source_interface"></a> [source\_interface](#input\_source\_interface) | Multisite Border Gateway source interface. Must match first field in the output of `show int brief`. Example: `lo1`. | `string` | `"unspecified"` | no |
 | <a name="input_suppress_arp"></a> [suppress\_arp](#input\_suppress\_arp) | Enable or disable suppress ARP. | `bool` | `false` | no |
 | <a name="input_suppress_mac_route"></a> [suppress\_mac\_route](#input\_suppress\_mac\_route) | Enable or disable suppress MAC Route. | `bool` | `false` | no |
-| <a name="input_vnis"></a> [vnis](#input\_vnis) | List of vnis. Default value `associate_vrf`: `false`. Default value `multicast_group`: `0.0.0.0`. Choices `multisite_ingrress_replication`: `enable`, `disable`, `enableOptimized`. Default value `multisite_ingrress_replication`: `disable`. Choices `suppress_arp`: `enabled`, `disabled`, `off`. Default value `suppress_arp`: `off`. Choices `ingress_replication_protocol`: `bgp`, `static`, `unknown`. Default value `ingress_replication_protocol`: `unknown`. | <pre>list(object({<br>    vni                            = number<br>    associate_vrf                  = optional(bool)<br>    multicast_group                = optional(string)<br>    multisite_ingrress_replication = optional(string)<br>    suppress_arp                   = optional(string)<br>    ingress_replication_protocol   = optional(string)<br>  }))</pre> | `[]` | no |
+| <a name="input_vnis"></a> [vnis](#input\_vnis) | List of vnis. Default value `associate_vrf`: `false`. Default value `multicast_group`: `0.0.0.0`. Choices `multisite_ingress_replication`: `enable`, `disable`, `enableOptimized`. Default value `multisite_ingress_replication`: `disable`. Choices `suppress_arp`: `enabled`, `disabled`, `off`. Default value `suppress_arp`: `off`. Choices `ingress_replication_protocol`: `bgp`, `static`, `unknown`. Default value `ingress_replication_protocol`: `unknown`. | <pre>list(object({<br>    vni                           = number<br>    associate_vrf                 = optional(bool)<br>    multicast_group               = optional(string)<br>    multisite_ingress_replication = optional(string)<br>    suppress_arp                  = optional(string)<br>    ingress_replication_protocol  = optional(string)<br>  }))</pre> | `[]` | no |
 
 ## Outputs
 

@@ -14,7 +14,7 @@ Note that this example will create resources. Resources can be destroyed with `t
 ```hcl
 module "nxos_interface_nve" {
   source  = "netascode/interface-nve/nxos"
-  version = ">= 0.0.1"
+  version = ">= 0.1.0"
 
   admin_state                      = true
   advertise_virtual_mac            = true

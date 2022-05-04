@@ -6,7 +6,7 @@ terraform {
 
     nxos = {
       source  = "netascode/nxos"
-      version = ">=0.3.4"
+      version = ">=0.3.8"
     }
   }
 }
@@ -36,66 +36,64 @@ module "main" {
   ]
 }
 
-data "nxos_rest" "nxos_nve_interface" {
-  dn = "sys/eps/epId-[1]"
-
+data "nxos_nve_interface" "nvoEp" {
   depends_on = [module.main]
 }
 
-resource "test_assertions" "nxos_nve_interface" {
-  component = "nxos_vnxos_nve_interfacerf"
+resource "test_assertions" "nvoEp" {
+  component = "nvoEp"
 
-  equal "adminSt" {
-    description = "adminSt"
-    got         = data.nxos_rest.nxos_nve_interface.content.adminSt
+  equal "admin_state" {
+    description = "admin_state"
+    got         = data.nxos_nve_interface.nvoEp.admin_state
     want        = "disabled"
   }
 
-  equal "advertiseVmac" {
-    description = "advertiseVmac"
-    got         = data.nxos_rest.nxos_nve_interface.content.advertiseVmac
-    want        = "no"
+  equal "advertise_virtual_mac" {
+    description = "advertise_virtual_mac"
+    got         = data.nxos_nve_interface.nvoEp.advertise_virtual_mac
+    want        = false
   }
 
-  equal "holdDownTime" {
-    description = "holdDownTime"
-    got         = data.nxos_rest.nxos_nve_interface.content.holdDownTime
-    want        = "180"
+  equal "hold_down_time" {
+    description = "hold_down_time"
+    got         = data.nxos_nve_interface.nvoEp.hold_down_time
+    want        = 180
   }
 
-  equal "hostReach" {
-    description = "hostReach"
-    got         = data.nxos_rest.nxos_nve_interface.content.hostReach
+  equal "host_reachability_protocol" {
+    description = "host_reachability_protocol"
+    got         = data.nxos_nve_interface.nvoEp.host_reachability_protocol
     want        = "Flood-and-learn"
   }
 
-  equal "ingressReplProtoBGP" {
-    description = "hostReach"
-    got         = data.nxos_rest.nxos_nve_interface.content.ingressReplProtoBGP
-    want        = "no"
+  equal "ingress_replication_protocol_bgp" {
+    description = "ingress_replication_protocol_bgp"
+    got         = data.nxos_nve_interface.nvoEp.ingress_replication_protocol_bgp
+    want        = false
   }
 
-  equal "multisiteBordergwInterface" {
-    description = "multisiteBordergwInterface"
-    got         = data.nxos_rest.nxos_nve_interface.content.multisiteBordergwInterface
+  equal "multisite_source_interface" {
+    description = "multisite_source_interface"
+    got         = data.nxos_nve_interface.nvoEp.multisite_source_interface
     want        = "unspecified"
   }
 
-  equal "sourceInterface" {
-    description = "sourceInterface"
-    got         = data.nxos_rest.nxos_nve_interface.content.sourceInterface
+  equal "source_interface" {
+    description = "source_interface"
+    got         = data.nxos_nve_interface.nvoEp.source_interface
     want        = "unspecified"
   }
 
-  equal "suppressARP" {
-    description = "suppressARP"
-    got         = data.nxos_rest.nxos_nve_interface.content.suppressARP
-    want        = "no"
+  equal "suppress_arp" {
+    description = "suppress_arp"
+    got         = data.nxos_nve_interface.nvoEp.suppress_arp
+    want        = false
   }
 
-  equal "suppressMacRoute" {
-    description = "suppressMacRoute"
-    got         = data.nxos_rest.nxos_nve_interface.content.suppressMacRoute
-    want        = "no"
+  equal "suppress_mac_route" {
+    description = "suppress_mac_route"
+    got         = data.nxos_nve_interface.nvoEp.suppress_mac_route
+    want        = false
   }
 }

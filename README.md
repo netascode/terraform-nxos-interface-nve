@@ -12,7 +12,7 @@ Model Documentation: [Link](https://developer.cisco.com/docs/cisco-nexus-3000-an
 ```hcl
 module "nxos_interface_nve" {
   source  = "netascode/interface-nve/nxos"
-  version = ">= 0.1.0"
+  version = ">= 0.2.0"
 
   admin_state                      = true
   advertise_virtual_mac            = true
@@ -52,7 +52,7 @@ module "nxos_interface_nve" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_nxos"></a> [nxos](#requirement\_nxos) | >= 0.3.8 |
 
 ## Providers

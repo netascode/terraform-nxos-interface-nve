@@ -53,13 +53,13 @@ module "nxos_interface_nve" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_nxos"></a> [nxos](#requirement\_nxos) | >= 0.3.8 |
+| <a name="requirement_nxos"></a> [nxos](#requirement\_nxos) | >= 0.5.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_nxos"></a> [nxos](#provider\_nxos) | >= 0.3.8 |
+| <a name="provider_nxos"></a> [nxos](#provider\_nxos) | >= 0.5.0 |
 
 ## Inputs
 
@@ -89,8 +89,8 @@ module "nxos_interface_nve" {
 
 | Name | Type |
 |------|------|
-| [nxos_nve_interface.nvoEp](https://registry.terraform.io/providers/netascode/nxos/latest/docs/resources/nve_interface) | resource |
-| [nxos_nve_vni.nvoNw](https://registry.terraform.io/providers/netascode/nxos/latest/docs/resources/nve_vni) | resource |
-| [nxos_nve_vni_container.nvoNws](https://registry.terraform.io/providers/netascode/nxos/latest/docs/resources/nve_vni_container) | resource |
-| [nxos_nve_vni_ingress_replication.nvoIngRepl](https://registry.terraform.io/providers/netascode/nxos/latest/docs/resources/nve_vni_ingress_replication) | resource |
+| [nxos_nve_interface.nvoEp](https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/nve_interface) | resource |
+| [nxos_nve_vni.nvoNw](https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/nve_vni) | resource |
+| [nxos_nve_vni_container.nvoNws](https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/nve_vni_container) | resource |
+| [nxos_nve_vni_ingress_replication.nvoIngRepl](https://registry.terraform.io/providers/CiscoDevNet/nxos/latest/docs/resources/nve_vni_ingress_replication) | resource |
 <!-- END_TF_DOCS -->
